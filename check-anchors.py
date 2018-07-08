@@ -38,4 +38,8 @@ for link in soup.find_all('a'):
 broken_href_sorted = sorted(broken_href)
 print("List of broken anchors:")
 for bhs in broken_href_sorted:
+  if '\n' in bhs:
+    print("------ (next anchor contains line break)")
   print(bhs)
+  if '\n' in bhs:
+    print("------")
