@@ -5,6 +5,7 @@ version='1.0.0'
 
 import argparse
 from bs4 import BeautifulSoup
+from urllib import parse as uparse
 
 parser = argparse.ArgumentParser(description='check for broken anchors',formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("f", help='file to check')
@@ -30,7 +31,7 @@ broken_href = set()
 for link in soup.find_all('a'):
   href = link.get('href')
   if href is not None and href.startswith("#"):
-    href2 = href[1:]
+    href2 = uparse.unquote_plus(href[1:])
     if href2 not in elem_set:
       broken_href.add(href2)
 
